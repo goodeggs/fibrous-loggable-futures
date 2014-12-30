@@ -1,0 +1,37 @@
+{
+  "name": "fibrous-loggable-futures",
+  "version": "1.0.0",
+  "description": "Fibrous mixin to log results of futures, and wait for logged results",
+  "author": "Good Eggs <open-source@goodeggs.com>",
+  "license": "MIT",
+  "keywords": [
+    "fibrous",
+    "logging"
+  ],
+  "main": "lib/fibrous_loggable_futures.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/goodeggs/fibrous-loggable-futures.git"
+  },
+  "homepage": "https://github.com/goodeggs/fibrous-loggable-futures",
+  "bugs": "https://github.com/goodeggs/fibrous-loggable-futures/issues",
+  "dependencies": {
+    "underscore": "~1.7.0"
+  },
+  "devDependencies": {
+    "coffee-script": ">=1.8.x",
+    "fibrous": ">=0.3.3",
+    "mocha": "~1.x.x",
+    "sinon": "~1.12.2",
+    "mocha-sinon": "~1.1.4",
+    "chai": "~1.10.0",
+    "sinon-chai": "~2.6.0",
+    "mocha-fibers": "~1.1.0"
+  },
+  "scripts": {
+    "compile": "coffee --bare --compile --output lib/ src/",
+    "prepublish": "npm run compile",
+    "pretest": "npm run compile",
+    "test": "mocha"
+  }
+}
