@@ -13,7 +13,38 @@ npm install fibrous-loggable-futures
 ```
 
 ```js
-var fibrousLoggableFutures = require('fibrous-loggable-futures');
+var fibrous = require('fibrous'),
+    loggableFutures = require('fibrous-loggable-futures'),
+    logger = {
+      info: function(message),
+      error: function(context, message)
+    }
+
+loggableFutures(fibrous, logger)
+```
+
+Now you can log results of futured work:
+```js
+email.future.send(...).andLogResults("you'll get this in the future")
+```
+
+Pass a flag if you only want to hear about errors:
+```js
+email.future.send(...).andLogResults("and this one too", {errorsOnly: true})
+```
+
+For quick and dirty synchronization, you can wait for all logged futures to resolve:
+```js
+sendAll = ->
+  email.future.send(...).andLogResults('message')
+  email.future.send(...).andLogResults('message')
+
+/* Somewhere else, like a test */
+fibrous.captureLoggedFutures()
+sendAll()
+fibrous.sync.waitForLoggedFutures()
+// ...
+fibrous.uncaptureLoggedFutures()
 ```
 
 ## Contributing
