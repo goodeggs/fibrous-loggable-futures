@@ -1,6 +1,6 @@
 {
   "name": "fibrous-loggable-futures",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fibrous mixin to log results of futures, and wait for logged results",
   "author": "Good Eggs <open-source@goodeggs.com>",
   "license": "MIT",
