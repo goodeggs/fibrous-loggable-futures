@@ -1,6 +1,6 @@
 _ = require 'underscore'
 
-module.exports = (fibrous, logger) ->
+module.exports = (fibrous, defaultLogger) ->
   Future = fibrous.Future
 
   # various signatures that andLogResults handles:
@@ -14,6 +14,7 @@ module.exports = (fibrous, logger) ->
     if _(contextMsg).isObject()
       [contextMsg, options] = [contextObj.msg, contextMsg]
     options ?= {}
+    logger = options.logger ? defaultLogger
     throw new Error('You must supply a contextMsg to andLogResults') if !contextMsg
     @resolve (err, result) ->
       if err?

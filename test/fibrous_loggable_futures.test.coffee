@@ -41,6 +41,14 @@ describe 'fibrous-loggable-futures', ->
         expect(-> fibrous.sync.waitForLoggedFutures()).to.throw('boom')
         expect(@logger.error).to.have.been.calledWith({err}, '"some message"', 'error from Future#andLogResults')
 
+      describe 'with a custom logger', ->
+        it 'logs the error with the custom logger', ->
+          customLogger = error: @sinon.spy()
+          obj.future.asyncF().andLogResults({contextKey: 'contextValue'}, 'some message', {logger: customLogger})
+          expect(-> fibrous.sync.waitForLoggedFutures()).to.throw('boom')
+          expect(@logger.error).not.to.have.been.called
+          expect(customLogger.error).to.have.been.calledWith({err, contextKey: 'contextValue'}, '"some message"', 'error from Future#andLogResults')
+
   describe '.waitForLoggedFutures', ->
     describe 'when not capturing logged futures', ->
       it 'throws', ->
